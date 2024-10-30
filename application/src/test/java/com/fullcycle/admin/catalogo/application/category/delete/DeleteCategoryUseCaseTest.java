@@ -62,7 +62,7 @@ public class DeleteCategoryUseCaseTest {
         final var aCategory = Category.newCategory("Filmes", "A categoria mais assistida", true);
         final var expectedId = aCategory.getId();
 
-        doThrow(new RuntimeException("Gateway error"))
+        doThrow(new IllegalStateException("Gateway error"))
                 .when(categoryGateway).deleteById(eq(expectedId));
 
         Assertions.assertThrows(IllegalStateException.class, () -> useCase.execute(expectedId.getValue()));
