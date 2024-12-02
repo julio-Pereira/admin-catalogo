@@ -4,6 +4,7 @@ import com.fullcycle.admin.catalogo.domain.AggregateRoot;
 import com.fullcycle.admin.catalogo.domain.validation.ValidationHandler;
 
 import java.time.Instant;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Category extends AggregateRoot<CategoryID> implements Cloneable {
@@ -26,8 +27,8 @@ public class Category extends AggregateRoot<CategoryID> implements Cloneable {
         this.name = aName;
         this.description = aDescription;
         this.isActive = isActive;
-        this.createdAt = aCreationDate;
-        this.updatedAt = aUpdatedDate;
+        this.createdAt = Objects.requireNonNull(aCreationDate, "'Created at' cannot be null");
+        this.updatedAt = Objects.requireNonNull(aUpdatedDate, "'Updated at' cannot be null");
         this.deletedAt = aDeletedDate;
     }
 
@@ -48,8 +49,29 @@ public class Category extends AggregateRoot<CategoryID> implements Cloneable {
                 deleteAt);
     }
 
-    public static Category with(final Category aCategory) {
+    public static Category with(
+            final CategoryID anId,
+            final String name,
+            final String description,
+            final boolean active,
+            final Instant createdAt,
+            final Instant updatedAt,
+            final Instant deletedAt
+    ) {
         return new Category(
+                anId,
+                name,
+                description,
+                active,
+                createdAt,
+                updatedAt,
+                deletedAt
+        );
+    }
+
+
+    public static Category with(final Category aCategory) {
+        return with(
                 aCategory.getId(),
                 aCategory.name,
                 aCategory.description,
