@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.flywaydb:flyway-mysql:8.5.10")
+        classpath("org.flywaydb:flyway-mysql:10.21.0")
     }
 }
 
@@ -11,8 +11,8 @@ plugins {
     id 'java'
     id 'application'
     id 'org.springframework.boot' version '3.3.5'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'org.flywaydb.flyway' version '8.5.10'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.flywaydb.flyway' version '10.21.0'
 }
 
 group = 'com.fullcycle.admin.catalogo.infrastructure'
@@ -42,8 +42,10 @@ dependencies {
     }
     implementation('org.springframework.boot:spring-boot-starter-undertow')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
-    testRuntimeOnly('com.h2database:h2')
+    testRuntimeOnly('com.h2database:h2:2.2.220')
 
+    testImplementation('org.flywaydb:flyway-core')
+    testImplementation('org.flywaydb:flyway-mysql')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 
 }
