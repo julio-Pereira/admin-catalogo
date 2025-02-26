@@ -10,3 +10,7 @@ server:
     threads:
       worker: 64
       io: 4
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

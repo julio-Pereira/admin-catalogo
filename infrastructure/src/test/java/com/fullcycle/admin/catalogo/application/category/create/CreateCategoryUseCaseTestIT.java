@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
@@ -21,7 +21,7 @@ public class CreateCategoryUseCaseTestIT {
     @Autowired
     private CategoryRepository repository;
 
-    @SpyBean
+    @MockitoSpyBean
     private CategoryGateway gateway;
 
 
@@ -42,7 +42,7 @@ public class CreateCategoryUseCaseTestIT {
 
         Assertions.assertEquals(1, repository.count());
 
-        final var actualCategory = repository.findById(actualOutput.id().getValue()).get();
+        final var actualCategory = repository.findById(actualOutput.id()).get();
 
         Assertions.assertEquals(expectedName,actualCategory.getName());
         Assertions.assertEquals(expectedDescription,actualCategory.getDescription());
@@ -97,7 +97,7 @@ public class CreateCategoryUseCaseTestIT {
 
         Assertions.assertEquals(1, repository.count());
 
-        final var actualCategory = repository.findById(actualOutput.id().getValue()).get();
+        final var actualCategory = repository.findById(actualOutput.id()).get();
 
         Assertions.assertEquals(expectedName,actualCategory.getName());
         Assertions.assertEquals(expectedDescription,actualCategory.getDescription());
